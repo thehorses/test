@@ -22,4 +22,5 @@ public abstract class BaseServiceImpl implements BaseService {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
+
 }
