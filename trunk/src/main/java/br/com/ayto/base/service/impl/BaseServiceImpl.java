@@ -3,6 +3,7 @@ package br.com.ayto.base.service.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import br.com.ayto.base.model.BaseModel;
 import br.com.ayto.base.service.BaseService;
 
 public abstract class BaseServiceImpl implements BaseService {
@@ -21,6 +22,11 @@ public abstract class BaseServiceImpl implements BaseService {
 
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
+	}
+
+	@Override
+	public <T extends BaseModel> T findById(Class<T> clazz, Object id) {
+		return getEM().find(clazz, id);
 	}
 
 }
