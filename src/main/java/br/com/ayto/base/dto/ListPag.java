@@ -19,8 +19,8 @@ public class ListPag<E extends BaseModel> extends BaseDTO {
 	}
 
 	public ListPag(List<E> lista, int qtdeRegistros) {
-		// this.addAll(list);
 		this.lista = lista;
+		this.qtdeRegistros = qtdeRegistros;
 		
 	}
 

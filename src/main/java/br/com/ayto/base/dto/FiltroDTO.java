@@ -4,8 +4,7 @@ public class FiltroDTO extends BaseDTO {
 	private static final long serialVersionUID = 2107529864066708875L;
 
 	private int primeiroReg;
-	private int qtdePagina;
-	private boolean todosReg;
+	private int qtdePorPagina;
 
 	public int getPrimeiroReg() {
 		return primeiroReg;
@@ -15,20 +14,12 @@ public class FiltroDTO extends BaseDTO {
 		this.primeiroReg = primeiroReg;
 	}
 
-	public int getQtdePagina() {
-		return qtdePagina;
+	public int getQtdePorPagina() {
+		return qtdePorPagina;
 	}
 
-	public void setQtdePagina(int qtdePagina) {
-		this.qtdePagina = qtdePagina;
-	}
-
-	public boolean isTodosReg() {
-		return todosReg;
-	}
-
-	public void setTodosReg(boolean todosReg) {
-		this.todosReg = todosReg;
+	public void setQtdePorPagina(int qtdePorPagina) {
+		this.qtdePorPagina = qtdePorPagina;
 	}
 
 }
