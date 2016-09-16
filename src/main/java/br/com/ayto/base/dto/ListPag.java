@@ -1,20 +1,27 @@
 package br.com.ayto.base.dto;
 
-import java.util.Collection;
+import java.util.List;
 
 import br.com.ayto.base.model.BaseModel;
 
-public class ListPag<T extends BaseModel> /*extends ArrayList<T> implements java.util.List<T>*/ {
+//Tem um BUG no Eclipse que se extender um List com Generics, ele fica fechando sozinha sempre que usa a classe.
+// :(
 
-	private static final long serialVersionUID = 215258710427357558L;
+//public class ListPag<E extends BaseModel> extends ArrayList<E> implements java.util.List<E> {
+
+public class ListPag<E extends BaseModel> extends BaseDTO {
+	private static final long serialVersionUID = -4022291044372347268L;
 
 	private int qtdeRegistros;
+	private List<E> lista;
 
 	public ListPag() {
 	}
 
-	public ListPag(Collection<T> list) {
-		//this.addAll(list);
+	public ListPag(List<E> lista, int qtdeRegistros) {
+		// this.addAll(list);
+		this.lista = lista;
+		
 	}
 
 	public int getQtdeRegistros() {
@@ -23,6 +30,14 @@ public class ListPag<T extends BaseModel> /*extends ArrayList<T> implements java
 
 	public void setQtdeRegistros(int qtdeRegistros) {
 		this.qtdeRegistros = qtdeRegistros;
+	}
+
+	public List<E> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<E> lista) {
+		this.lista = lista;
 	}
 
 }
