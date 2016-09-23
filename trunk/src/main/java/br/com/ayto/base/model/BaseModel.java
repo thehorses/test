@@ -12,4 +12,7 @@ public abstract class BaseModel implements Serializable {
 		return getId() == null;
 	}
 
+	public abstract int hashCode();
+
+	public abstract boolean equals(Object obj);
 }
