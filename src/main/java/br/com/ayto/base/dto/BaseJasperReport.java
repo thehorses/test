@@ -21,6 +21,7 @@ public class BaseJasperReport {
 
 	public BaseJasperReport(InputStream jasper, Map<String, Object> parametros) {
 		try {
+			// JasperReport jr = JasperCompileManager.compileReport(jrxml);
 			print = JasperFillManager.fillReport(jasper, parametros);
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao gerar relatório", e);

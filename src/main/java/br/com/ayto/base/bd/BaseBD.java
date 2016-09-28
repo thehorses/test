@@ -21,5 +21,5 @@ public class BaseBD {
 		wsResult.setStatus(Status.ERRO);
 		wsResult.setMensagem(e.getMessage());
 		return wsResult;
-	}
+	} 
 }
