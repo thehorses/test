@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.ayto</groupId>
 	<artifactId>aytobase</artifactId>
@@ -123,9 +122,9 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.8.0</version>
+			<version>1.9.3</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -138,10 +137,22 @@
 		</dependency>
 
 		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>1.8.0</version>
-		</dependency>		
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.2</version>
+		</dependency>
 
 
 		<!-- Hibernate Validator dependencies -->
@@ -168,6 +179,12 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.3.0</version>
 		</dependency>
 
 
