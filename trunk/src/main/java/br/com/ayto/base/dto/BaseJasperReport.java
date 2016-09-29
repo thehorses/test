@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -14,15 +15,12 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 
 public class BaseJasperReport {
 
-	String jrxml;
-	Map<String, Object> parametros;
 	JasperPrint print;
-	OutputStream saida;
 
-	public BaseJasperReport(InputStream jasper, Map<String, Object> parametros) {
+	public BaseJasperReport(InputStream jasper, Map<String, Object> parametros, JRDataSource jrDataSource) {
 		try {
 			// JasperReport jr = JasperCompileManager.compileReport(jrxml);
-			print = JasperFillManager.fillReport(jasper, parametros);
+			print = JasperFillManager.fillReport(jasper, parametros, jrDataSource);
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao gerar relatório", e);
 		}
