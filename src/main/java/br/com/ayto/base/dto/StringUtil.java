@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+
 public class StringUtil {
 
 	public static String formatTelefone(String telefone) {
@@ -79,5 +81,8 @@ public class StringUtil {
 		System.out.println(formatCnpj("30123456000185"));
 		System.out.println(formatCep("06150090"));
 		System.out.println(formatRg("302435906"));
+		
+		System.out.println(new SimpleDateFormat("HHmmDDDyy").format(new Date()));
+		System.out.println(StringUtils.reverse(new SimpleDateFormat("HHmmDDDyy").format(new Date())));
 	}
 }
