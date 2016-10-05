@@ -1,4 +1,4 @@
-package br.com.ayto.base.dto;
+package br.com.ayto.base.util;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
