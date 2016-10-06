@@ -74,6 +74,13 @@ public class StringUtil {
 		return SimpleDateFormat.getDateInstance().format(date);
 	}
 
+	public static String formatDataHora(Date date) {
+		if (date == null) {
+			return null;
+		}
+		return SimpleDateFormat.getDateTimeInstance().format(date);
+	}
+
 	public static String moedaPorExtenso(double vlr) {
 		// http://www.devmedia.com.br/valor-por-extenso-em-uma-aplicacao-java/21897
 		if (vlr == 0)

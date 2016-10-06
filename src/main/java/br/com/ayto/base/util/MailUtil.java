@@ -1,7 +1,10 @@
 package br.com.ayto.base.util;
 
+import java.io.File;
 import java.util.Properties;
 
+import javax.activation.CommandMap;
+import javax.activation.MailcapCommandMap;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Multipart;
@@ -15,6 +18,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.FileUtils;
 
 import br.com.ayto.base.dto.AnexoEmail;
 import br.com.ayto.base.dto.Email;
@@ -40,6 +44,14 @@ public class MailUtil {
 
 		/** Ativa Debug para sessão */
 		session.setDebug(true);
+		
+		MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
+        mc.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
+        mc.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
+        mc.addMailcap("text/plain;; x-java-content-handler=com.sun.mail.handlers.text_plain");
+        mc.addMailcap("multipart/*;; x-java-content-handler=com.sun.mail.handlers.multipart_mixed");
+        mc.addMailcap("message/rfc822;; x-java-content-handler=com.sun.mail.handlers.message_rfc822");
+        CommandMap.setDefaultCommandMap(mc);
 	}
 
 	public static void main(String[] args) {
@@ -49,7 +61,7 @@ public class MailUtil {
 			Email email = new Email();
 			email.setDestCopia("tosani@gmail.com");
 			email.setAssunto("Autenticacao do cadastro de usuario no OS - AYTO");
-			email.setConteudo("<h1>Titulo</h1><br>Ola!");
+			email.setConteudo(FileUtils.readFileToString(new File("L:/WORKSPACE/ECLIPSE_KLEPER/prestservico/src/main/resources/mail/ativacao.html"), "ISO-8859-1"));
 //			AnexoEmail anexo = new AnexoEmail();
 //			anexo.setNome("prt.pdf");
 //			anexo.setArquivo(new File("C:/Users/PRT/Desktop/Manual_Vectra_2011.pdf"));
@@ -64,7 +76,7 @@ public class MailUtil {
 	public static void enviar(Email email) {
 
 		try {
-
+			Thread.currentThread().setContextClassLoader(javax.mail.Message.class.getClassLoader());
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("thehorses@gmail.com", "OS - AYTO"));
 
