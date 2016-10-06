@@ -29,6 +29,10 @@ public class Email extends BaseDTO {
 		this.conteudo = conteudo;
 	}
 
+	public void setConteudo(StringBuilder conteudo) {
+		this.conteudo = conteudo.toString();
+	}
+
 	public String[] getDestPara() {
 		return destPara;
 	}
