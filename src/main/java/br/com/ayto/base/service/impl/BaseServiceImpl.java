@@ -2,6 +2,7 @@ package br.com.ayto.base.service.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.xml.ws.BindingProvider;
 
 import org.apache.commons.lang.StringUtils;
@@ -55,6 +56,10 @@ public abstract class BaseServiceImpl implements BaseService {
 		if (!StringUtils.isBlank(password)) {
 			bp.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, password);
 		}
+	}
+
+	protected Query setQueryCache(Query query) {
+		return query.setHint("org.hibernate.cacheable", true);
 	}
 
 }
