@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 
 public class StringUtil {
 
@@ -200,6 +201,11 @@ public class StringUtil {
 		}
 		return (s);
 	}
+	
+	public static void validarEmail(String email){
+		String regex = "[A-Za-z0-9\\._-]+@[A-Za-z]+\\.[A-Za-z]+";
+		Validate.isTrue(email.matches(regex), "O e-mail '" + email + "' é inválido");
+	}
 
 	public static Object getLineSeparator() {
 		return System.getProperty("line.separator");
@@ -223,6 +229,7 @@ public class StringUtil {
 		System.out.println(moedaPorExtenso(10));
 		System.out.println(moedaPorExtenso(5));
 		System.out.println(moedaPorExtenso(5.54));
+		validarEmail("tosani@gmail.com");
 	}
 
 }
