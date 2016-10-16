@@ -5,12 +5,12 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-public abstract class QuartzJobBean implements Job {
+public abstract class QuartzJobBean extends org.springframework.scheduling.quartz.QuartzJobBean  implements Job {
 
 	public abstract void executeIssoSeLiberado(JobExecutionContext jec) throws Exception;
 
 	@Override
-	public void execute(JobExecutionContext jec) throws JobExecutionException {
+	protected void executeInternal(JobExecutionContext jec) throws JobExecutionException {
 		try {
 			getLog().debug("Job iniciado");
 			executeIssoSeLiberado(jec);
