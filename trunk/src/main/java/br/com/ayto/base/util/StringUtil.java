@@ -68,6 +68,13 @@ public class StringUtil {
 		return DecimalFormat.getCurrencyInstance().format(moeda);
 	}
 
+	public static String formatDecimal(Double decimal) {
+		if (decimal == null) {
+			return null;
+		}
+		return DecimalFormat.getInstance().format(decimal);
+	}
+
 	public static String formatData(Date date) {
 		if (date == null) {
 			return null;
@@ -201,8 +208,8 @@ public class StringUtil {
 		}
 		return (s);
 	}
-	
-	public static void validarEmail(String email){
+
+	public static void validarEmail(String email) {
 		String regex = "[A-Za-z0-9\\._-]+@[A-Za-z]+\\.[A-Za-z]+";
 		Validate.isTrue(email.matches(regex), "O e-mail '" + email + "' é inválido");
 	}
