@@ -8,6 +8,8 @@ import javax.xml.ws.BindingProvider;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import br.com.ayto.base.model.BaseModel;
 import br.com.ayto.base.service.BaseService;
@@ -17,6 +19,9 @@ public abstract class BaseServiceImpl implements BaseService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@Autowired
+	private ApplicationContext applicationContext;
 
 	public EntityManager getEntityManager() {
 		return entityManager;
@@ -60,6 +65,14 @@ public abstract class BaseServiceImpl implements BaseService {
 
 	protected Query setQueryCache(Query query) {
 		return query.setHint("org.hibernate.cacheable", true);
+	}
+
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
 	}
 
 }
