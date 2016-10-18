@@ -1,6 +1,5 @@
 package br.com.ayto.base.util;
 
-import java.io.File;
 import java.util.Properties;
 
 import javax.activation.CommandMap;
@@ -16,61 +15,57 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.naming.NamingException;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import br.com.ayto.base.dto.AnexoEmail;
 import br.com.ayto.base.dto.Email;
 
 public class MailUtil {
+	private static final Log LOG = LogFactory.getLog(MailUtil.class);
 
 	private static Session session;
 	static {
 		Properties props = new Properties();
-		/** Parâmetros de conexão com servidor Gmail */
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.socketFactory.port", "465");
-		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.port", "465");
-		props.put("mail.smtp.starttls.enable", "true");
+		try {
+			props.put("mail.smtp.host", ConfigUtil.getValueContextParm("mail.smtp.host"));
+			props.put("mail.smtp.socketFactory.port", ConfigUtil.getValueContextParm("mail.smtp.socketFactory.port"));
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.auth", ConfigUtil.getValueContextParm("mail.smtp.auth"));
+			props.put("mail.smtp.port", ConfigUtil.getValueContextParm("mail.smtp.port"));
+			props.put("mail.smtp.starttls.enable", ConfigUtil.getValueContextParm("mail.smtp.starttls.enable"));
+		} catch (NamingException e) {
+			LOG.error(e);
+		}
 
 		session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("thehorses@gmail.com", "java0202");
+				try {
+					return new PasswordAuthentication(ConfigUtil.getValueContextParm("mail.smtp.username"), ConfigUtil.getValueContextParm("mail.smtp.password"));
+				} catch (NamingException e) {
+					LOG.error(e);
+				}
+				return null;
 			}
 		});
 
 		/** Ativa Debug para sessão */
-		session.setDebug(true);
-		
-		MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
-        mc.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
-        mc.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
-        mc.addMailcap("text/plain;; x-java-content-handler=com.sun.mail.handlers.text_plain");
-        mc.addMailcap("multipart/*;; x-java-content-handler=com.sun.mail.handlers.multipart_mixed");
-        mc.addMailcap("message/rfc822;; x-java-content-handler=com.sun.mail.handlers.message_rfc822");
-        CommandMap.setDefaultCommandMap(mc);
-	}
-
-	public static void main(String[] args) {
-
 		try {
-
-			Email email = new Email();
-			email.setDestCopia("tosani@gmail.com");
-			email.setAssunto("Autenticacao do cadastro de usuario no OS - AYTO");
-			email.setConteudo(FileUtils.readFileToString(new File("L:/WORKSPACE/ECLIPSE_KLEPER/prestservico/src/main/resources/mail/ativacao.html"), "ISO-8859-1"));
-//			AnexoEmail anexo = new AnexoEmail();
-//			anexo.setNome("prt.pdf");
-//			anexo.setArquivo(new File("C:/Users/PRT/Desktop/Manual_Vectra_2011.pdf"));
-//			email.addAnexo(anexo);
-			enviar(email);
-
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+			session.setDebug(Boolean.getBoolean(ConfigUtil.getValueContextParm("mail.session.debug")));
+		} catch (NamingException e) {
+			LOG.error(e);
 		}
+
+		MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
+		mc.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
+		mc.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
+		mc.addMailcap("text/plain;; x-java-content-handler=com.sun.mail.handlers.text_plain");
+		mc.addMailcap("multipart/*;; x-java-content-handler=com.sun.mail.handlers.multipart_mixed");
+		mc.addMailcap("message/rfc822;; x-java-content-handler=com.sun.mail.handlers.message_rfc822");
+		CommandMap.setDefaultCommandMap(mc);
 	}
 
 	public static void enviar(Email email) {
@@ -78,7 +73,7 @@ public class MailUtil {
 		try {
 			Thread.currentThread().setContextClassLoader(javax.mail.Message.class.getClassLoader());
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("thehorses@gmail.com", "OS - AYTO"));
+			message.setFrom(new InternetAddress(ConfigUtil.getValueContextParm("mail.smtp.username"), ConfigUtil.getValueContextParm("mail.smtp.personal")));
 
 			Address[] toUser = montarAddress(email.getDestPara());
 			Address[] ccUser = montarAddress(email.getDestCopia());
@@ -113,7 +108,7 @@ public class MailUtil {
 
 			Transport.send(message);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 			throw new RuntimeException(e);
 		}
 	}
