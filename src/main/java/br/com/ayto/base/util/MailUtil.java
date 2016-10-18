@@ -75,6 +75,7 @@ public class MailUtil {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(ConfigUtil.getValueContextParm("mail.smtp.username"), ConfigUtil.getValueContextParm("mail.smtp.personal")));
 
+			if(ConfigUtil.isAmbienteProd()){				
 			Address[] toUser = montarAddress(email.getDestPara());
 			Address[] ccUser = montarAddress(email.getDestCopia());
 			Address[] bccUser = montarAddress(email.getDestCopiaOculta());
@@ -87,6 +88,9 @@ public class MailUtil {
 			}
 			if (bccUser != null) {
 				message.setRecipients(Message.RecipientType.BCC, bccUser);
+			}
+			}else{
+				message.setRecipients(Message.RecipientType.TO, montarAddress(ConfigUtil.getValueContextParm("ambiente.teste.email.destinatario")));
 			}
 			message.setSubject(email.getAssunto());
 
@@ -113,7 +117,7 @@ public class MailUtil {
 		}
 	}
 
-	private static Address[] montarAddress(String[] address) throws AddressException {
+	private static Address[] montarAddress(String... address) throws AddressException {
 		if (address == null || address.length == 0) {
 			return null;
 		}

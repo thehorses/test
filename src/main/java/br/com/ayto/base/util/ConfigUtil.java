@@ -12,4 +12,8 @@ public class ConfigUtil {
 		String value = (String) environmentContext.lookup(key);
 		return value;
 	}
+
+	public static final boolean isAmbienteProd() throws NamingException {
+		return Boolean.getBoolean(ConfigUtil.getValueContextParm("ambiente.producao"));
+	}
 }
