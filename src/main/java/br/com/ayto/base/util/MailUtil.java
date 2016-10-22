@@ -76,6 +76,7 @@ public class MailUtil {
 
 	public void enviar(Email email) {
 		try {
+			LOG.debug("Inicio");
 			Thread.currentThread().setContextClassLoader(javax.mail.Message.class.getClassLoader());
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(ConfigUtil.getValueContextParm("mail.smtp.username"), ConfigUtil.getValueContextParm("mail.smtp.personal")));
@@ -119,6 +120,8 @@ public class MailUtil {
 		} catch (Exception e) {
 			LOG.error(e);
 			throw new RuntimeException(e);
+		} finally {
+			LOG.debug("Fim");
 		}
 	}
 
