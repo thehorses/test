@@ -62,7 +62,7 @@ public class MailUtil {
 			}
 		});
 
-		/** Ativa Debug para sess„o */
+		/** Ativa Debug para sess√£o */
 		session.setDebug(Boolean.getBoolean(ConfigUtil.getValueContextParm("mail.session.debug")));
 
 		MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
