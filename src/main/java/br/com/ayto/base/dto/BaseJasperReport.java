@@ -26,7 +26,7 @@ public class BaseJasperReport {
 				print = JasperFillManager.fillReport(jasper, parametros);
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao gerar relatório", e);
+			throw new RuntimeException("Erro ao gerar relatÃ³rio", e);
 		}
 	}
 

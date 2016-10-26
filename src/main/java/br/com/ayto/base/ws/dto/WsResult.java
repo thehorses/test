@@ -9,7 +9,7 @@ public class WsResult {
 	}
 
 	private Status status = Status.OK;
-	private String mensagem = "Operação efetuada com sucesso.";
+	private String mensagem = "OperaÃ§Ã£o efetuada com sucesso.";
 	private List<String> erros;
 
 	public Status getStatus() {

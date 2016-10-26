@@ -95,21 +95,21 @@ public class StringUtil {
 			return ("zero");
 
 		long inteiro = (long) Math.abs(vlr); // parte inteira do valor
-		double resto = vlr - inteiro; // parte fracion·ria do valor
+		double resto = vlr - inteiro; // parte fracion√°ria do valor
 
 		String vlrS = String.valueOf(inteiro);
 		if (vlrS.length() > 15)
-			return ("Erro: valor superior a 999 trilhıes.");
+			return ("Erro: valor superior a 999 trilh√µes.");
 
 		String s = "", saux, vlrP;
 		String centavos = String.valueOf((int) Math.round(resto * 100));
 
-		String[] unidade = { "", "um", "dois", "trÍs", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis",
+		String[] unidade = { "", "um", "dois", "tr√™s", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis",
 				"dezessete", "dezoito", "dezenove" };
 		String[] centena = { "", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos" };
 		String[] dezena = { "", "", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa" };
-		String[] qualificaS = { "", "mil", "milh„o", "bilh„o", "trilhıo" };
-		String[] qualificaP = { "", "mil", "milhıes", "bilhıes", "trilhıes" };
+		String[] qualificaS = { "", "mil", "milh√£o", "bilh√£o", "trilh√£o" };
+		String[] qualificaP = { "", "mil", "milh√µes", "bilh√µes", "trilh√µes" };
 
 		// definindo o extenso da parte inteira do valor
 		int n, unid, dez, cent, tam, i = 0;
@@ -120,11 +120,11 @@ public class StringUtil {
 			// 123456789:
 			// 1a. parte = 789 (centena)
 			// 2a. parte = 456 (mil)
-			// 3a. parte = 123 (milhıes)
+			// 3a. parte = 123 (milh√µes)
 			if (tam > 3) {
 				vlrP = vlrS.substring(tam - 3, tam);
 				vlrS = vlrS.substring(0, tam - 3);
-			} else { // ˙ltima parte do valor
+			} else { // √∫ltima parte do valor
 				vlrP = vlrS;
 				vlrS = "0";
 			}
@@ -173,7 +173,7 @@ public class StringUtil {
 			}
 			if (((i == 0) || (i == 1)) && s.length() != 0)
 				tem = true; // tem centena ou mil no valor
-			i = i + 1; // pr√≥ximo qualificador: 1- mil, 2- milh„o, 3- bilh„o,
+			i = i + 1; // pr√≥ximo qualificador: 1- mil, 2- milh√£o, 3- bilh√£o,
 						// ...
 		}
 
@@ -188,7 +188,7 @@ public class StringUtil {
 
 		// definindo o extenso dos centavos do valor
 		if (!centavos.equals("0")) { // valor com centavos
-			if (s.length() != 0) // se n„o √© valor somente com centavos
+			if (s.length() != 0) // se n√£o √© valor somente com centavos
 				s = s + " e ";
 			if (centavos.equals("1"))
 				s = s + "um centavo";
@@ -211,7 +211,7 @@ public class StringUtil {
 
 	public static void validarEmail(String email) {
 		String regex = "[A-Za-z0-9\\._-]+@[A-Za-z]+\\.[A-Za-z]+";
-		Validate.isTrue(email.matches(regex), "O e-mail '" + email + "' È inv·lido");
+		Validate.isTrue(email.matches(regex), "O e-mail '" + email + "' √© inv√°lido");
 	}
 
 	public static Object getLineSeparator() {
