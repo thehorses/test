@@ -1,6 +1,7 @@
 package br.com.ayto.base.util;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -66,6 +67,17 @@ public class StringUtil {
 			return null;
 		}
 		return DecimalFormat.getCurrencyInstance().format(moeda);
+	}
+
+	public static Double parseMoeda2Double(String moeda) throws ParseException {
+		if (moeda == null) {
+			return null;
+		}
+		moeda = moeda.replaceAll("\\.", "");
+		moeda = moeda.replaceAll(",", ".");
+		moeda = moeda.replaceAll("[^0-9\\.]", "");
+
+		return Double.parseDouble(moeda);
 	}
 
 	public static String formatDecimal(Double decimal) {
@@ -218,7 +230,7 @@ public class StringUtil {
 		return System.getProperty("line.separator");
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		System.out.println(formatTelefone("982550529"));
 		System.out.println(formatTelefone("82550529"));
 		System.out.println(formatCpf("21975907825"));
@@ -237,6 +249,8 @@ public class StringUtil {
 		System.out.println(moedaPorExtenso(5));
 		System.out.println(moedaPorExtenso(5.54));
 		validarEmail("tosani@gmail.com");
+
+		System.out.println(parseMoeda2Double("R$ 1.500,25"));
 	}
 
 }
