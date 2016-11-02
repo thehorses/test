@@ -14,6 +14,6 @@ public class ConfigUtil {
 	}
 
 	public static final boolean isAmbienteProd() throws NamingException {
-		return Boolean.getBoolean(ConfigUtil.getValueContextParm("ambiente.producao"));
+		return Boolean.parseBoolean(ConfigUtil.getValueContextParm("ambiente.producao"));
 	}
 }
