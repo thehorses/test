@@ -1,5 +1,7 @@
 package br.com.ayto.base.bd;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -19,7 +21,11 @@ public class BaseBD {
 			}
 		}
 		wsResult.setStatus(Status.ERRO);
-		wsResult.setMensagem(e.getMessage());
+		String message = e.getMessage();
+		if (StringUtils.isEmpty(message)) {
+			message = ExceptionUtils.getMessage(e);
+		}
+		wsResult.setMensagem(message);
 		return wsResult;
-	} 
+	}
 }
